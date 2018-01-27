@@ -42,5 +42,15 @@
 
   - 方法二：使用第三方库 ，谷歌关键词 `js syntax lib`，我使用的是 [prism.js](http://prismjs.com/)
 
-  - ​
+  - 测试：
+
+    - 引入`prism.css`和`prism.js` ，在  `main.js` 中输入如下代码：
+
+      ```
+      var code = "var data = 1;";
+      var html = Prism.highlight(code, Prism.languages.javascript);
+      console.log(html)
+      ```
+
+    - 修改对应参数，换成我们的代码
 
