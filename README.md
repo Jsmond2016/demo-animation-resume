@@ -46,11 +46,12 @@
 
     - 引入`prism.css`和`prism.js` ，在  `main.js` 中输入如下代码：
 
-      ```
+      ```javascript
       var code = "var data = 1;";
       var html = Prism.highlight(code, Prism.languages.javascript);
       console.log(html)
       ```
 
-    - 修改对应参数，换成我们的代码
+    - 修改对应参数，换成我们的代码， [js代码](https://github.com/Jsmond2016/demo-animation-resume/blob/e08658605db80d3dc6401f73017662443b7786f5/js/main.js)
+
 

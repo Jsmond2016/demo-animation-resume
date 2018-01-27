@@ -24,6 +24,34 @@ html{
   padding: 16px;
   margin:16px;
 }
+
+/*黑色的代码样式看着真丑，现在，我们让代码高亮*/
+
+.token.selector{
+  color: #690;
+}
+.token.property{
+  color: #905;
+}
+.token.punctuation{
+  color: #999;
+}
+
+
+/*感觉还少了点什么，我们来点3D效果*/
+
+/* #code{
+*  transform: skewY(8deg);
+}*/
+
+#code{
+  transform:rotate(360deg);
+}
+
+好啦，不玩啦，我来介绍一下我自己
+
+首先，准备一张白纸
+
 `
 
 var n = 0;
