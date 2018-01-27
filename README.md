@@ -54,4 +54,10 @@
 
     - 修改对应参数，换成我们的代码， [js代码](https://github.com/Jsmond2016/demo-animation-resume/blob/e08658605db80d3dc6401f73017662443b7786f5/js/main.js)
 
+    - 为了表示我们使用了代码高亮，因此一开始的代码不能高亮，所以要自己写一些样式覆盖代码高亮的样式，然后在还原回来代码高亮的效果。
+
+- 添加炫酷3D效果：使用 `transform:rotate(angle)` 
+
+
+
 

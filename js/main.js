@@ -62,8 +62,36 @@ var id = setInterval(()=>{
  styleTag.innerHTML = result.substring(0,n)
   if(n>=result.length){
     window.clearInterval(id)
+    fn2()
+    fn3(result)
   }
 },1)
+
+function fn2(){
+  var paper = document.createElement('div')
+  paper.id = 'paper'
+  document.body.appendChild(paper)
+}
+function fn3(preResult){
+  var result = `
+#paper{
+    width:100px;
+    height:100px;
+    background:red;
+  }
+
+  `
+  var n = 0;
+  var id = setInterval(()=>{
+    n+=1;
+    code.innerHTML = preResult + result.substring(0,n) //重点理解
+    code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
+    styleTag.innerHTML = preResult + result.substring(0,n)
+    if(n>=result.length){
+      window.clearInterval(id)
+    }
+  },1)
+}
 
 
 
