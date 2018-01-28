@@ -1,3 +1,25 @@
+//封装函数：把code写到code 和style 标签里面
+function writeCode(prefix,code,fn){
+  let domCode = document.querySelector('#code')
+  document.innerHTML = prefix || ''
+  let n = 0;
+  let id = setInterval(()=>{
+  n+=1;
+  domCode.innerHTML = Prism.highlight(prefix+code.substring(0,n),Prism.languages.css)
+  styleTag.innerHTML = prefix+code.substring(0,n)
+  if(n>=code.length){
+    window.clearInterval(id)
+    fn.call()
+  }
+},1)
+}
+
+
+
+
+
+
+
 
 
 var result = `
@@ -56,27 +78,7 @@ html{
 
 `
 
-var n = 0;
-var id = setInterval(()=>{
-  n+=1;
- code.innerHTML  = result.substring(0,n)
- code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
- styleTag.innerHTML = result.substring(0,n)
-  if(n>=result.length){
-    window.clearInterval(id)
-    fn2()
-    fn3(result)
-  }
-},1)
-
-function fn2(){
-  var paper = document.createElement('div')
-  paper.id = 'paper'
-  document.body.appendChild(paper)
-}
-
-function fn3(preResult){
-  var result = `
+var result2 = `
 #paper{
     width:100px;
     height:100px;
@@ -84,6 +86,48 @@ function fn3(preResult){
   }
 
   `
+
+// var n = 0;
+// var id = setInterval(()=>{
+//   n+=1;
+//  code.innerHTML  = result.substring(0,n)
+//  code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
+//  styleTag.innerHTML = result.substring(0,n)
+//   if(n>=result.length){
+//     window.clearInterval(id)
+//     fn2()
+//     fn3(result)
+//   }
+// },1)
+
+
+writeCode('',result,()=>{
+  console.log('前一个结束了')
+  createPaper(()=>{
+    writeCode(result,result2)
+    console.log('paper创建好了')
+  })
+})
+
+
+
+
+function createPaper(fn){
+  var paper = document.createElement('div')
+  paper.id = 'paper'
+  document.body.appendChild(paper)
+  fn.call()
+}
+
+function fn3(preResult){
+/*  var result = `
+#paper{
+    width:100px;
+    height:100px;
+    background:red;
+  }
+
+  `*/
   var n = 0;
   var id = setInterval(()=>{
     n+=1;
