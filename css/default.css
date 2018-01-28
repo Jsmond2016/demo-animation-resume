@@ -4,3 +4,7 @@
 #code{
 	height: 100vh;
 }
+
+#paper>pre{
+	padding: 16px;
+}
