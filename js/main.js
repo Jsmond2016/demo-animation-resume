@@ -10,7 +10,7 @@ function writeCode(prefix,code,fn){
     domCode.scrollTop = domCode.scrollHeight
     if(n>=code.length){
       window.clearInterval(id)
-      fn.call()
+      fn && fn.call()
       }
   },1)
 }
@@ -25,7 +25,7 @@ function writeMarkdown(markdown,fn){
       domPaper.scrollTop = domPaper.scrollHeight
       if(n >= markdown.length){
          window.clearInterval(id)
-         fn.call()
+         fn && fn.call()
       } 
   })
 }
@@ -113,18 +113,15 @@ html{
 
 /*感觉还少了点什么，我们来点3D效果*/
 
-/* #code{
-*  transform: skewY(8deg);
-}*/
+
 
 #code{
   transform:rotate(360deg);
 }
 
-/*好啦，不玩啦，我来介绍一下我自己
-
-* 首先，准备一张白纸
-
+/*
+*  好啦，不玩啦，我来介绍一下我自己
+*  首先，准备一张白纸
 */
 
 #code{
@@ -186,7 +183,9 @@ var result2 = `
 writeCode('',result,()=>{
   console.log('前一个结束了')
   createPaper(()=>{
-    writeCode(result,result2)
+    writeCode(result,result2,()=>{
+      writeMarkdown(md)
+    })
     console.log('paper创建好了')
   })
 })
@@ -204,26 +203,26 @@ function createPaper(fn){
   fn.call()
 }
 
-function fn3(preResult){
-/*  var result = `
-#paper{
-    width:100px;
-    height:100px;
-    background:red;
-  }
+// function fn3(preResult){
+// /*  var result = `
+// #paper{
+//     width:100px;
+//     height:100px;
+//     background:red;
+//   }
 
-  `*/
-  var n = 0;
-  var id = setInterval(()=>{
-    n+=1;
-    code.innerHTML = preResult + result.substring(0,n) //重点理解
-    code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
-    styleTag.innerHTML = preResult + result.substring(0,n)
-    if(n>=result.length){
-      window.clearInterval(id)
-    }
-  },1)
-}
+//   `*/
+//   var n = 0;
+//   var id = setInterval(()=>{
+//     n+=1;
+//     code.innerHTML = preResult + result.substring(0,n) //重点理解
+//     code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
+//     styleTag.innerHTML = preResult + result.substring(0,n)
+//     if(n>=result.length){
+//       window.clearInterval(id)
+//     }
+//   },1)
+// }
 
 
 
