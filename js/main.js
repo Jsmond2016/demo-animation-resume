@@ -48,9 +48,11 @@ html{
   transform:rotate(360deg);
 }
 
-好啦，不玩啦，我来介绍一下我自己
+/*好啦，不玩啦，我来介绍一下我自己
 
-首先，准备一张白纸
+* 首先，准备一张白纸
+
+*/
 
 `
 
@@ -72,6 +74,7 @@ function fn2(){
   paper.id = 'paper'
   document.body.appendChild(paper)
 }
+
 function fn3(preResult){
   var result = `
 #paper{
