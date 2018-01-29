@@ -1,34 +1,22 @@
-//封装函数：把code写到code 和style 标签里面
-function writeCode(prefix,code,fn){
-  let domCode = document.querySelector('#code')
-  document.innerHTML = prefix || ''
-  let n = 0;
-  let id = setInterval(()=>{
-    n+=1;
-    domCode.innerHTML = Prism.highlight(prefix+code.substring(0,n),Prism.languages.css)
-    styleTag.innerHTML = prefix+code.substring(0,n)
-    domCode.scrollTop = domCode.scrollHeight
-    if(n>=code.length){
-      window.clearInterval(id)
-      fn && fn.call()
-      }
-  },1)
-}
 
-
-function writeMarkdown(markdown,fn){
-  let domPaper = document.querySelector('#paper > .content')
-  let n  = 0;
-  let id = setInterval(()=>{
-      n +=  1
-      domPaper.innerHTML = markdown.substring(0,n)
-      domPaper.scrollTop = domPaper.scrollHeight
-      if(n >= markdown.length){
-         window.clearInterval(id)
-         fn && fn.call()
-      } 
+writeCode('',result,()=>{
+  console.log('前一个结束了')
+  createPaper(()=>{
+    writeCode(result,result2,()=>{
+      writeMarkdown(md,()=>{
+        writeCode(result,result2,()=>{
+          converMarkdownToHTML(()=>{
+            console.log('markdown转换完成!')
+          })
+        })
+      })
+    })
+    console.log('paper创建好了')
   })
-}
+})
+
+
+
 
 var md = `
 # 自我介绍
@@ -46,6 +34,25 @@ var md = `
 # 技能介绍
 
   熟悉JavaScript、HTML、CSS
+
+
+# 项目介绍
+
+  1. 简历制作
+
+  2. 轮播图
+
+  3. 网易云音乐移动端
+
+  4. 画板
+
+  # 联系方式
+
+  手机：123456789
+
+  QQ：1234536768
+
+  邮箱：123@gmail.com
 
 
 # 项目介绍
@@ -86,8 +93,11 @@ var result = `
   transition:all 1s;
   margin:0;
   padding:0;
+  box-sizing:border-box;
   font-size:18px;
 }
+
+
 
 html{
   background: #213F48;
@@ -124,7 +134,7 @@ html{
 *  首先，准备一张白纸
 */
 
-#code{
+#code-wrapper{
   position: fixed;
   left: 0;
   width: 50%;
@@ -140,6 +150,7 @@ html{
   display: flex;
   justify-content: center;
   align-items: center;
+  padding:16px;
 }
 
 #paper > .content{
@@ -166,30 +177,37 @@ var result2 = `
 */
   `
 
-// var n = 0;
-// var id = setInterval(()=>{
-//   n+=1;
-//  code.innerHTML  = result.substring(0,n)
-//  code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
-//  styleTag.innerHTML = result.substring(0,n)
-//   if(n>=result.length){
-//     window.clearInterval(id)
-//     fn2()
-//     fn3(result)
-//   }
-// },1)
+  //封装函数：把code写到code 和style 标签里面
+function writeCode(prefix,code,fn){
+  let domCode = document.querySelector('#code')
+  document.innerHTML = prefix || ''
+  let n = 0;
+  let id = setInterval(()=>{
+    n+=1;
+    domCode.innerHTML = Prism.highlight(prefix+code.substring(0,n),Prism.languages.css)
+    styleTag.innerHTML = prefix+code.substring(0,n)
+    domCode.scrollTop = 100000
+    if(n>=code.length){
+      window.clearInterval(id)
+      fn && fn.call()
+      }
+  },1)
+}
 
 
-writeCode('',result,()=>{
-  console.log('前一个结束了')
-  createPaper(()=>{
-    writeCode(result,result2,()=>{
-      writeMarkdown(md)
-    })
-    console.log('paper创建好了')
+function writeMarkdown(markdown,fn){
+  let domPaper = document.querySelector('#paper > .content')
+  let n  = 0;
+  let id = setInterval(()=>{
+      n +=  1
+      domPaper.innerHTML = markdown.substring(0,n)
+      domPaper.scrollTop = domPaper.scrollHeight
+      if(n >= markdown.length){
+         window.clearInterval(id)
+         fn && fn.call()
+      } 
   })
-})
-
+}
 
 
 
@@ -203,27 +221,13 @@ function createPaper(fn){
   fn.call()
 }
 
-// function fn3(preResult){
-// /*  var result = `
-// #paper{
-//     width:100px;
-//     height:100px;
-//     background:red;
-//   }
+function converMarkdownToHTML(fn){
+  var div = document.createElement('div')
+  div.className = 'html markdown-body'
+  div.innerHTML = marked(md)
 
-//   `*/
-//   var n = 0;
-//   var id = setInterval(()=>{
-//     n+=1;
-//     code.innerHTML = preResult + result.substring(0,n) //重点理解
-//     code.innerHTML = Prism.highlight(code.innerHTML,Prism.languages.css)
-//     styleTag.innerHTML = preResult + result.substring(0,n)
-//     if(n>=result.length){
-//       window.clearInterval(id)
-//     }
-//   },1)
-// }
-
-
-
+  let  markdownContainer = document.querySelector('#paper>.content')
+  markdownContainer.replace(div)
+  fn && fn.call()
+}
 
