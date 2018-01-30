@@ -156,7 +156,7 @@ html{
 #code-wrapper{
   position: fixed;
   left: 0;
-  width: 48%;
+  width: 50%;
   height:100%;
 }
 
@@ -166,7 +166,7 @@ html{
   width: 50%;
   height:100%;
   background: gray;
-  padding: 5px;
+  padding: 16px;
 }
 
 #paper > .content{
