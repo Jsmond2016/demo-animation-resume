@@ -4,17 +4,35 @@
 #paper>pre{
 	padding: 16px;
 }
-#code,.content{
+#code {
+  font-size:18px;
   width: 100%;
   overflow: hidden;
 }
 
 #code-wrapper{
-  padding: 16px;
   height: 100vh;
   display: flex;
 }
 
 #paper{
 	margin: 16px;
+	border-radius: 2px;
 }
+
+#paper>.html{
+	color: #24292e;
+	padding: 15px;
+	background-color: white;
+	height: 100%;
+	border-radius: 2px;
+	overflow: auto;
+}
+
+@keyframes breath{
+  0%{
+    box-shadow: 0 0 10px rgba(0,0,0,1)
+  }
+  100%{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2)
+  }

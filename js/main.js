@@ -1,77 +1,94 @@
 
-writeCode('',result,()=>{
-  console.log('前一个结束了')
-  createPaper(()=>{
-    writeCode(result,result2,()=>{
-      writeMarkdown(md,()=>{
-        writeCode(result,result2,()=>{
-          converMarkdownToHTML(()=>{
-            console.log('markdown转换完成!')
-          })
-        })
-      })
-    })
-    console.log('paper创建好了')
-  })
-})
 
 
 
 
 var md = `
-# 自我介绍
+# 黄锦的简历
+
+## 自我介绍
+
 ---
- 你好，我叫黄锦
 
-  1995年12月出生
+  ### 你好，我叫黄锦 , 1995年12月出生
 
-  江西xx大学毕业
+  ### 江西xx大学 软件工程（电子商务方向）毕业
 
-  自学前端半年 
+  ### 自学前端半年 
 
-  希望应聘前端开发工程师岗位
+  ### 希望应聘前端开发工程师岗位
+
   
-# 技能介绍
+  
+## 技能介绍
 
-  熟悉JavaScript、HTML、CSS
+---
 
-
-# 项目介绍
-
-  1. 简历制作
-
-  2. 轮播图
-
-  3. 网易云音乐移动端
-
-  4. 画板
-
-  # 联系方式
-
-  手机：123456789
-
-  QQ：1234536768
-
-  邮箱：123@gmail.com
+  ### 熟悉JavaScript、HTML、CSS
 
 
-# 项目介绍
 
-  1. 简历制作
 
-  2. 轮播图
+## 项目介绍
 
-  3. 网易云音乐移动端
+---
 
-  4. 画板
+  ### 1. [简历制作]()
 
-  # 联系方式
+  ### 2. [轮播图]()
 
-  手机：123456789
+  ### 3. [网易云音乐移动端]()
 
-  QQ：1234536768
+  ### 4. [画板]()
 
-  邮箱：123@gmail.com
+
+
+## 联系方式
+
+---
+
+  ### QQ：305859189
+
+  <br>
+
+  ### 手机：15979091598
+
+  <br>
+
+  ### 邮箱：jsmond2016@gmail.com
+
+  <br>
+
+  ### 学习博客： [个人博客](jsmond.info)
+  <br>
+  
+  ### Github: [Github](https://github.com/Jsmond2016)
+
+
+
+## 联系方式
+
+---
+
+  ### QQ：305859189
+
+  <br>
+
+  ### 手机：15979091598
+
+  <br>
+
+  ### 邮箱：jsmond2016@gmail.com
+
+  <br>
+
+  ### 学习博客： [个人博客](jsmond.info)
+  <br>
+  
+  ### Github: [Github](https://github.com/Jsmond2016)
+
+
+
 
 `
 
@@ -94,16 +111,15 @@ var result = `
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-size:18px;
 }
 
 
 
 html{
-  background: #213F48;
+  background: #eeeeee;
 }
 #code{
-  border:1px solid red;
+  border:1px solid black;
   padding: 16px;
   margin:16px;
 }
@@ -121,13 +137,16 @@ html{
 }
 
 
-/*感觉还少了点什么，我们来点3D效果*/
+/*感觉还少了点什么，我们加点呼吸效果*/
 
 
 
 #code{
-  transform:rotate(360deg);
+  border-radius: 2px;
+  animation: breath 0.5s infinite alternate-reverse;
 }
+
+
 
 /*
 *  好啦，不玩啦，我来介绍一下我自己
@@ -137,7 +156,7 @@ html{
 #code-wrapper{
   position: fixed;
   left: 0;
-  width: 50%;
+  width: 48%;
   height:100%;
 }
 
@@ -147,10 +166,7 @@ html{
   width: 50%;
   height:100%;
   background: gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding:16px;
+  padding: 5px;
 }
 
 #paper > .content{
@@ -167,15 +183,60 @@ var result2 = `
 * 接下来，把markdown变成 HTML
 */
 
+
 /*
 * 接下来，给 HTML 加样式
 
 */
 
-/*
-* 这就是我会动的简历
-*/
+
+
+
+#paper hr{
+  margin: 15px 0;
+}
+
+#paper h1{
+  text-align: center;
+}
+
+#paper h2{
+  margin:10px 0;
+}
+
+
+
   `
+
+
+var result3 = `
+/*
+* 这就是我会动的简历,感谢您的观看！
+*/
+`
+
+
+writeCode('',result,()=>{
+  console.log('前一个结束了')
+  createPaper(()=>{
+    writeCode(result,result2,()=>{
+      writeMarkdown(md,()=>{
+        writeCode(result+result2,result3,()=>{
+          converMarkdownToHTML(()=>{
+            console.log('markdown转换完成!')
+          })
+        })
+      })
+    })
+    console.log('paper创建好了')
+  })
+})
+
+
+
+
+
+
 
   //封装函数：把code写到code 和style 标签里面
 function writeCode(prefix,code,fn){
@@ -191,7 +252,7 @@ function writeCode(prefix,code,fn){
       window.clearInterval(id)
       fn && fn.call()
       }
-  },1)
+  },3)
 }
 
 
@@ -227,7 +288,7 @@ function converMarkdownToHTML(fn){
   div.innerHTML = marked(md)
 
   let  markdownContainer = document.querySelector('#paper>.content')
-  markdownContainer.replace(div)
+  markdownContainer.replaceWith(div)
   fn && fn.call()
 }
 
