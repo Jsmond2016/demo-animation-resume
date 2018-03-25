@@ -252,7 +252,7 @@ function writeCode(prefix,code,fn){
       window.clearInterval(id)
       fn && fn.call()
       }
-  },50)
+  },10)
 }
 
 
